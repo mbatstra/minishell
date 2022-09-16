@@ -6,30 +6,30 @@
 /*   By: mbatstra <mbatstra@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 17:30:39 by mbatstra          #+#    #+#             */
-/*   Updated: 2022/09/16 14:04:19 by mbatstra         ###   ########.fr       */
+/*   Updated: 2022/09/16 16:08:02 by dvan-kri      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <readline/history.h>
+#include <readline/readline.h>
 #include "minishell.h"
+#include "lexer.h"
 
 int	main(int argc, char **argv, char **envp)
 {
-	char	**new_env;
+	while (1)
+	{
+		input = readline("minishell-$ ");
+		if (input == NULL)
+			return (1);
+		if (input[0] != '\0')
+		{
+			add_history(input);
+			lexer(input);
+		}
+	}
 
-	(void) argc;
-	(void) argv;
-	new_env = env_init(envp);
-	printf("-----\n");
-	builtin_pwd();
-	printf("-----\n");
-	builtin_env(new_env);
-	builtin_cd(NULL, new_env);
-	printf("-----\n");
-	builtin_pwd();
-	printf("-----\n");
-	builtin_env(new_env);
-	// system("leaks minishell");
 	return (0);
 }
