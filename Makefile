@@ -23,7 +23,7 @@ SRC = $(addprefix $(SRC_DIR), $(UNPREFIXED_SRC))
 INC = inc/
 TEST_INC = test/criterion--git/include
 
-FLAGS = -Wall -Wextra -Werror 
+FLAGS = -Wall -Wextra -Werror
 
 LIB = lib/
 LIBFT = lib/libft/libft.a
@@ -36,13 +36,13 @@ $(LIBFT):
 	$(MAKE) -C $(LIB)libft/ WITH_BONUS=1
 
 $(NAME): $(OBJ) $(INC)*
-	$(CC) $(OBJ) $(LIBFT) -I$(INC) -o $(NAME)
+	$(CC) -fsanitize=address -lreadline $(OBJ) $(LIBFT) -I$(INC) -o $(NAME)
 
 $(BUILD_DIR)%.o: $(SRC_DIR)%.c | $(BUILD_DIR) $(BUILD_SUBDIRS)
 	$(CC) $(FLAGS) -I$(INC) -c $< -o $@
 
 $(TEST_NAME): $(LIBFT) $(TEST_SRC) $(filter-out main.c, $(SRC))
-	$(CC) $(TEST_SRC) $(LIBFT) $(filter-out src/main.c, $(SRC)) $(CRITERION) -I$(INC) -I$(TEST_INC) -o $(TEST_NAME) 
+	$(CC) $(TEST_SRC) $(LIBFT) $(filter-out src/main.c, $(SRC)) $(CRITERION) -I$(INC) -I$(TEST_INC) -o $(TEST_NAME)
 
 $(BUILD_DIR):
 	mkdir $@
