@@ -6,7 +6,7 @@
 /*   By: mbatstra <mbatstra@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 18:22:08 by mbatstra          #+#    #+#             */
-/*   Updated: 2022/09/20 16:57:31 by dvan-kri      ########   odam.nl         */
+/*   Updated: 2022/09/21 13:01:09 by dvan-kri      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,13 @@ t_token	*tokenize(const char *str_token)
 	return (new_token);
 }
 
-int	lexer(t_list **tokens, char *cmd_line)
+
+/*
+  what does the function do?
+  this function takes the input string,
+  rename to what it does.
+ */
+int	lexical_analyzer(t_list **tokens, char *cmd_line)
 {
 	t_list	*list_item;
 	t_token *token;

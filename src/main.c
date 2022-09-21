@@ -6,7 +6,7 @@
 /*   By: mbatstra <mbatstra@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 17:30:39 by mbatstra          #+#    #+#             */
-/*   Updated: 2022/09/21 12:49:18 by dvan-kri      ########   odam.nl         */
+/*   Updated: 2022/09/21 13:00:40 by dvan-kri      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main()
 		if (input[0] != '\0')
 		{
 			add_history(input);
-			lexer(&token_list, input);
+			lexical_analyzer(&token_list, input);
 		}
 	}
 	return (0);

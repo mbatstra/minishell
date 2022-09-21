@@ -6,7 +6,7 @@
 /*   By: mbatstra <mbatstra@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 17:30:49 by mbatstra          #+#    #+#             */
-/*   Updated: 2022/09/20 18:17:31 by mbatstra         ###   ########.fr       */
+/*   Updated: 2022/09/21 13:03:09 by dvan-kri      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_cmd {
 }			t_cmd;
 
 // lexing and parsing
-int		lexer(t_list **tokens, char *cmd_line);
+int	lexical_analyzer(t_list **tokens, char *cmd_line);
 
 // functions for expandign and setting env vars
 void	env_init(char **envp, t_list **new_env);
@@ -65,4 +65,4 @@ int		builtin_pwd(void);
 int		builtin_echo(char *str, int nflag);
 int		builtin_env(t_list *envp);
 
-#endif 
+#endif
