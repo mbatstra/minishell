@@ -6,7 +6,7 @@
 /*   By: mbatstra <mbatstra@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 17:30:49 by mbatstra          #+#    #+#             */
-/*   Updated: 2022/09/18 16:30:47 by mbatstra         ###   ########.fr       */
+/*   Updated: 2022/09/20 18:17:31 by mbatstra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@
 # include "libft.h"
 
 enum e_types {
-	WORD,
-	REDIR,
+	RDR_IN,
+	RDR_OUT,
+	RDR_RDIN,
+	RDR_APP,
 	PIPE,
-	UNKNOWN
+	WORD
 };
 
 typedef struct s_token {
@@ -50,20 +52,17 @@ typedef struct s_cmd {
 int		lexer(t_list **tokens, char *cmd_line);
 
 // functions for expandign and setting env vars
-char	**env_init(char **envp);
-char	*env_getval(char **envp, const char *name);
-void	env_setval(char **envp, const char *name, const char *val);
-
-// utilities for env functions
-void	arr_clear(char **arr);
-void	arr_init(char **arr, int len);
-int		arr_len(char **arr);
+void	env_init(char **envp, t_list **new_env);
+void	env_setval(t_list **envp, const char *name, const char *val);
+char	*env_getval(t_list **envp, const char *name);
 
 // builtins
 void	builtin_exit(void);
-int		builtin_cd(char *path, char **envp);
+int		builtin_export(t_list **envp, char *nameval);
+int		builtin_unset(t_list **envp, char *name);
+int		builtin_cd(char *path, t_list **envp);
 int		builtin_pwd(void);
 int		builtin_echo(char *str, int nflag);
-int		builtin_env(char **envp);
+int		builtin_env(t_list *envp);
 
 #endif 
