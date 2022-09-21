@@ -6,13 +6,20 @@
 /*   By: mbatstra <mbatstra@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 18:22:08 by mbatstra          #+#    #+#             */
-/*   Updated: 2022/09/18 16:40:07 by mbatstra         ###   ########.fr       */
+/*   Updated: 2022/09/20 16:57:31 by dvan-kri      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include "minishell.h"
 #include "libft.h"
+
+void	identify_token(t_token *token)
+{
+	if (!(ft_strncmp("ls", token->value, 2)))
+		printf("matched\n");
+}
 
 t_token	*tokenize(const char *str_token)
 {
@@ -29,13 +36,14 @@ t_token	*tokenize(const char *str_token)
 	}
 	new_token->value = new_value;
 	// set type
+	identify_token(new_token);
 	return (new_token);
 }
 
-// not sure yet what conditions to check llist on
-// null, already contains elements, etc
 int	lexer(t_list **tokens, char *cmd_line)
 {
+	t_list	*list_item;
+	t_token *token;
 	char	**spl_line;
 	int		i;
 
@@ -45,8 +53,14 @@ int	lexer(t_list **tokens, char *cmd_line)
 		return (1);
 	while (spl_line[i] != NULL)
 	{
-		ft_lstadd_back(tokens, ft_lstnew(spl_line[i])); //add tokens instead
-		// add return value to add_back to check if allocation success
+		token = tokenize(spl_line[i]);
+		list_item = ft_lstnew(token);
+		if (list_item == NULL)
+		{
+			ft_lstclear(&list_item, &free);
+			return (1);
+		}
+		ft_lstadd_back(tokens, list_item);
 		i++;
 	}
 	return (0);
