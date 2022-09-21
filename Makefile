@@ -6,7 +6,6 @@ BUILD_DIR = build/
 BUILD_SUBDIRS = build/builtin build/env
 
 UNPREFIXED_SRC = main.c \
-	builtin/env.c \
 	builtin/pwd.c \
 	builtin/cd.c \
 	builtin/echo.c \
