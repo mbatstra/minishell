@@ -6,7 +6,7 @@
 /*   By: mbatstra <mbatstra@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 18:22:08 by mbatstra          #+#    #+#             */
-/*   Updated: 2022/09/21 20:44:05 by dvan-kri      ########   odam.nl         */
+/*   Updated: 2022/09/22 17:44:12 by dvan-kri      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 void	identify_token(t_token *token)
 {
 	if (!(ft_strncmp("ls", token->value, 2)))
-		printf("matched\n");
+		return ;
+//		printf("matched\n");
 }
 
 t_token	*tokenize(const char *str_token)
@@ -44,12 +45,16 @@ t_token	*tokenize(const char *str_token)
 int	lexical_analyzer(t_list **tokens, char *cmd_line)
 {
 /*
-  what does the function do?
   this function takes the input string (cmd_line) and splits it up into a (linked) list of tokens
+
+  finite state machine
+  begin bij het eerste karakter
+  if '\"' --> state "
+  else if '\'' --> state '
+  else ' ' --> state ' '
+  else state is letters
+
  */
-
-
-
 	t_list	*list;
 
 
@@ -59,13 +64,7 @@ int	lexical_analyzer(t_list **tokens, char *cmd_line)
 	struct s_list	*next;
 }	t_list;
 	*/
-
-
-
-
 	t_token *token;
-
-
 
 
 /*
@@ -75,39 +74,57 @@ typedef struct s_token {
 }			t_token;
 */
 
-
-
-
-	char	**spl_line;
-
 	int		i;
 	i = 0;
 
-
-	spl_line = ft_split(cmd_line, ' ');
-
-
-	if (spl_line == NULL)
-		return (1);
-
-
-	list = spl_line[i];
-
-
-	while (spl_line[i] != NULL)
+	while (cmd_line[i])
 	{
-		token = tokenize(spl_line[i]);
-		list = ft_lstnew(token);/* hier verder */
-/* die token wordt aan die lijst geplakt. maar moeten we niet een pointer behouden naar het eerste element in de lijst? */
-		if (list == NULL)
+		if (cmd_line[i] == ' ')
 		{
-			ft_lstclear(&list, &free);
-			return (1);
+			printf("1\n");
 		}
-		ft_lstadd_back(tokens, list);
+		else if (cmd_line[i] == '\'')
+		{
+			printf("2\n");
+		}
+		else if (cmd_line[i] == '\"')
+		{
+			printf("3\n");
+		}
+		else
+		{
+			printf("4\n");
+		}
 		i++;
 	}
 	return (0);
+	token = tokenize("word");
+	list = ft_lstnew(token);
+	ft_lstadd_back(tokens, list);
+//	spl_line = ft_split(cmd_line, ' ');
+
+
+//	if (spl_line == NULL)
+//		return (1);
+
+
+	/* while (spl_line[i] != NULL) */
+	/* { */
+
+
+
+	/* 	printf("tokens: %s\n", ((t_token *)(list->content))->value); */
+
+
+	/* 	if (list == NULL) */
+	/* 	{ */
+	/* 		ft_lstclear(tokens, &free); */
+	/* 		return (1); */
+	/* 	} */
+
+	/* 	i++; */
+	/* } */
+	/* return (0); */
 
 
 
