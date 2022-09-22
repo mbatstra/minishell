@@ -6,7 +6,7 @@
 /*   By: mbatstra <mbatstra@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 17:30:39 by mbatstra          #+#    #+#             */
-/*   Updated: 2022/09/21 13:00:40 by dvan-kri      ########   odam.nl         */
+/*   Updated: 2022/09/22 17:45:03 by dvan-kri      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,19 @@
 #include <readline/readline.h>
 #include "minishell.h"
 #include "lexer.h"
+
+void	print_tokenlist(t_list *token_list)
+{
+	t_list *current;
+
+	current = token_list->content;
+	while (current->next != NULL)
+	{
+		printf("current token: %s\n", ((t_token *)token_list->content)->value);
+		current = current->next;
+	}
+}
+
 
 int	main()
 {
@@ -32,6 +45,7 @@ int	main()
 		{
 			add_history(input);
 			lexical_analyzer(&token_list, input);
+//			print_tokenlist(token_list);
 		}
 	}
 	return (0);
