@@ -6,7 +6,7 @@
 /*   By: mbatstra <mbatstra@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 18:22:08 by mbatstra          #+#    #+#             */
-/*   Updated: 2022/09/21 13:01:09 by dvan-kri      ########   odam.nl         */
+/*   Updated: 2022/09/21 20:44:05 by dvan-kri      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,33 +41,74 @@ t_token	*tokenize(const char *str_token)
 }
 
 
-/*
-  what does the function do?
-  this function takes the input string,
-  rename to what it does.
- */
 int	lexical_analyzer(t_list **tokens, char *cmd_line)
 {
-	t_list	*list_item;
-	t_token *token;
-	char	**spl_line;
-	int		i;
+/*
+  what does the function do?
+  this function takes the input string (cmd_line) and splits it up into a (linked) list of tokens
+ */
 
+
+
+	t_list	*list;
+
+
+	/* typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
+	*/
+
+
+
+
+	t_token *token;
+
+
+
+
+/*
+typedef struct s_token {
+	enum e_types	type;
+	char			*value;
+}			t_token;
+*/
+
+
+
+
+	char	**spl_line;
+
+	int		i;
 	i = 0;
+
+
 	spl_line = ft_split(cmd_line, ' ');
+
+
 	if (spl_line == NULL)
 		return (1);
+
+
+	list = spl_line[i];
+
+
 	while (spl_line[i] != NULL)
 	{
 		token = tokenize(spl_line[i]);
-		list_item = ft_lstnew(token);
-		if (list_item == NULL)
+		list = ft_lstnew(token);/* hier verder */
+/* die token wordt aan die lijst geplakt. maar moeten we niet een pointer behouden naar het eerste element in de lijst? */
+		if (list == NULL)
 		{
-			ft_lstclear(&list_item, &free);
+			ft_lstclear(&list, &free);
 			return (1);
 		}
-		ft_lstadd_back(tokens, list_item);
+		ft_lstadd_back(tokens, list);
 		i++;
 	}
 	return (0);
+
+
+
 }
