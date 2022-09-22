@@ -6,7 +6,7 @@
 /*   By: mbatstra <mbatstra@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 18:22:08 by mbatstra          #+#    #+#             */
-/*   Updated: 2022/09/21 13:01:09 by dvan-kri      ########   odam.nl         */
+/*   Updated: 2022/09/21 13:44:00 by dvan-kri      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ t_token	*tokenize(const char *str_token)
 /*
   what does the function do?
   this function takes the input string,
+  and makes a linked list of tokens
+
+  t_list staat in libft.h
+  t_list *list_item
+
+  t_token staat in minishell.h
+  t_token *token
   rename to what it does.
  */
 int	lexical_analyzer(t_list **tokens, char *cmd_line)
