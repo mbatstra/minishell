@@ -6,7 +6,7 @@
 /*   By: mbatstra <mbatstra@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 17:30:49 by mbatstra          #+#    #+#             */
-/*   Updated: 2022/09/21 13:03:09 by dvan-kri      ########   odam.nl         */
+/*   Updated: 2022/09/22 20:26:48 by dvan-kri      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ typedef struct s_cmd {
 
 // lexing and parsing
 int	lexical_analyzer(t_list **tokens, char *cmd_line);
+
+// expansion
+char	*expand_relpath(char *relp);
 
 // functions for expandign and setting env vars
 void	env_init(char **envp, t_list **new_env);
